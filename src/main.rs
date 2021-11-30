@@ -11,10 +11,6 @@ fn main() {
 
      */
 
-     /* Greet the user and ask them what to convert
-        They can either choose F to C or C to F
-      */
-
       println!("\n###---- 6350 Temperature Converter ----###\n");
       println!("Enter F to convert Fahrenheit to Celsius.");
       println!("Enter C to convert Celsius to Fahrenheit.\n");
@@ -66,5 +62,22 @@ fn fahrenheit_to_celsius() {
 
 
 fn celsius_to_fahrenheit() {
-    println!("Print Celsius");
+    loop {
+        let mut celsius = String::new();
+
+        println!("Enter Celsius °C:");
+        io::stdin().read_line(&mut celsius).expect("An error occured!");
+
+        let result = match celsius.trim().parse::<f32>() {
+            Ok(value) => value,
+            Err(_) => {
+                println!("Only numbers are required!\n");
+                continue;
+            }
+        };
+
+        let fahrenheit = (result * 9.0/5.0) + 32.0;
+        println!("Celsius to Fahrenheit: {}°F", fahrenheit);
+        break;
+    }
 }
