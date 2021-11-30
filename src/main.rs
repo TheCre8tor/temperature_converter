@@ -43,12 +43,27 @@ fn main() {
 }
 
 fn fahrenheit_to_celsius() {
-    let mut fahrenheit = String::new();
+    loop {
+       let mut fahrenheit = String::new();
 
-    println!("Enter Fahrenheit °F:");
-    io::stdin().read_line(&mut fahrenheit).expect("Error has occured!");
-    println!("{}", fahrenheit);
+       println!("Enter Fahrenheit °F:");
+       io::stdin().read_line(&mut fahrenheit).expect("Error has occured!");
+    
+       let response = match fahrenheit.trim().parse::<f32>() {
+           Ok(value) => value,
+           Err(_) => {
+               println!("Only numbers are required!\n");
+               continue;
+           }
+       };
+    
+       let celsius: f32 = (response - 32.0) * 5.0/9.0;
+
+       println!("Fahrenheit to Celsius: {}°C\n", celsius);
+       break;
+    }
 }
+
 
 fn celsius_to_fahrenheit() {
     println!("Print Celsius");
